@@ -5,23 +5,25 @@ import logo from '../logo.svg';
 function Header() {
 
     return (
-        <AppBar component="nav">
-            <Toolbar>
-                <Box
-                    component="img"
-                    sx={{ height: 64 }}
-                    alt="Ein Logo eines Zuges"
-                    src={logo}
-                />
-                <Typography
-                    variant="h6"
-                    component="h1"
-                    sx={{ ml: 1 }}
-                >
-                    mit dem Zug
-                </Typography>
-            </Toolbar>
-        </AppBar>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar component="nav">
+                <Toolbar>
+                    <Box
+                        component="img"
+                        sx={{ height: 64, mr: 1 }}
+                        alt="Ein Logo eines Zuges"
+                        src={logo}
+                    />
+                    <Typography
+                        variant="h6"
+                        component="h1"
+                        sx={{ flexGrow: 1 }}
+                    >
+                        mit dem Zug
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+        </Box >
     );
 }
 
