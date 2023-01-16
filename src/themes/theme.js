@@ -20,6 +20,6 @@ export const appTheme = createTheme({
         ].join(','),
         h6: {
             fontWeight: 1000,
-        }
+        },
     },
 });

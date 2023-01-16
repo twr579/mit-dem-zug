@@ -6,7 +6,7 @@ import SelectStationAndTimeLimitForm from './selectStationAndTimeLimitForm';
 
 function CoverPaper() {
     return (
-        <Paper sx={{ p: 5 }}>
+        <Paper sx={{ p: 2, m: 2 }}>
             <Stack
                 direction="column"
                 justifyContent="center"
@@ -17,7 +17,7 @@ function CoverPaper() {
                 <Typography variant="h3" component="h2">
                     <Typewriter
                         options={{
-                            strings: ['mit dem Zug', 'eine Webseite von Tim R.'],
+                            strings: ["mit dem Zug", "eine Webseite von Tim R."],
                             autoStart: true,
                             loop: true,
                         }}
@@ -25,7 +25,7 @@ function CoverPaper() {
                 </Typography>
                 <Box
                     component="img"
-                    sx={{ height: 'auto', width: '25%' }}
+                    sx={{ height: "auto", width: "25%" }}
                     alt="Ein Logo eines Zuges"
                     src={logo}
                 />

@@ -1,52 +1,81 @@
 import * as React from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
+import { client, deutscheBahnHeaders } from '../api/client';
+import { debounce } from '@mui/material/utils';
 
-function StationAutocomplete() {
-    const [station, setStation] = React.useState(null);
+function StationAutocomplete({ station, setStation }) {
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
 
+    const fetch = React.useMemo(
+        () =>
+            debounce((request, callback) => {
+                const url = `https://apis.deutschebahn.com/db-api-marketplace/apis/fahrplan/v1/location/${request.input}`;
+                client.get(url, deutscheBahnHeaders)
+                    .then(callback);
+            }, 400),
+        [],
+    );
+
     React.useEffect(() => {
-        // Don't call the API on an empty input
+        let active = true;
+
+        // Don't call the API on empty input
         if (inputValue === '') {
             setOptions(station ? [station] : []);
             return undefined;
         }
 
-        fetch(`https://apis.deutschebahn.com/db-api-marketplace/apis/fahrplan/v1/location/${inputValue}`, {
-            headers: {
-                "DB-Api-Key": "0f1f41c8ad89c2f0299e66253354b0fc",
-                "DB-Client-Id": "74f35008b2f0cb75d353554e071b5b0a"
+        fetch({ input: inputValue }, (results) => {
+            if (active) {
+                let newOptions = [];
+
+                if (station) {
+                    newOptions = [station];
+                }
+
+                if (results) {
+                    newOptions = [...newOptions, ...results.data];
+                }
+
+                setOptions(newOptions);
             }
-        })
-            .then((response) => response.json())
-            .then((json) => setOptions(json))
-    }, [station, inputValue])
+        });
+
+        return () => {
+            active = false;
+        };
+    }, [station, inputValue, fetch]);
 
     return (
         <Autocomplete
             id="station-autocomplete"
             sx={{ display: 'inline-block', width: 200 }}
-            getOptionLabel={(options) => `${options.name}`}
+            getOptionLabel={(option) => option.name || ""}
             filterOptions={(x) => x}
             options={options}
             autoComplete
             includeInputInList
             filterSelectedOptions
             value={station}
-            noOptionsText="No locations"
+            noOptionsText="keine Stationen"
             isOptionEqualToValue={(option, value) =>
-                option.name === value.name
+                option.id === value.id
             }
-            onChange={(event, newValue) => {
+            onChange={(e, newValue) => {
                 setOptions(newValue ? [newValue, ...options] : options);
                 setStation(newValue);
             }}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(e, newInputValue) => {
                 setInputValue(newInputValue);
             }}
             renderOption={(props, options) => (
-                <Box component="li" {...props} key={options.id}>
+                <Box
+                    component="li"
+                    {...props}
+                    key={options.id}
+                    sx={{ wordBreak: "break-word" }}
+                >
                     {options.name}
                 </Box>
             )}

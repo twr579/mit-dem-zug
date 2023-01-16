@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import logo from '../logo.svg';
 
 function Header() {
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar component="nav">
