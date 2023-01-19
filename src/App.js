@@ -4,7 +4,6 @@ import { appTheme } from './themes/theme';
 import Header from './components/header';
 import CoverPaper from './components/coverPaper';
 import BerlinHbf from './images/BerlinHbf.webp';
-import DestinationsList from './components/destinationsList';
 import { useSelector } from 'react-redux';
 
 function App() {

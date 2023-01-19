@@ -90,7 +90,6 @@ const findDestinationsHelper = async (start, stopId, currTime, remainingTime, tr
             }
         }
     }
-    console.log(destinations);
     return destinations;
 }
 
