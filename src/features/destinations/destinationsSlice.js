@@ -3,6 +3,13 @@ import { client } from '../../api/client';
 
 const { formatInTimeZone } = require('date-fns-tz')
 
+const DBAPIHeaders = {
+    headers: {
+        'DB-Api-Key': '0f1f41c8ad89c2f0299e66253354b0fc',
+        'DB-Client-Id': '74f35008b2f0cb75d353554e071b5b0a',
+    }
+};
+
 // Recursively finds all possible destinations accessible from the given starting station within the given time frame
 // Inputs:
 //  start: the starting station provided by the user
@@ -125,7 +132,7 @@ const getTrip = async (tripId, stopId) => {
 //  stopId: the unique id of the current stop
 const getPhoto = async (stopId) => {
     let url = `https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/${stopId}`;
-    let response = await client.get(url);
+    let response = await client.get(url, DBAPIHeaders);
 
     // Some stops don't have station ids, so default to the stop id
     let stationId = response.data.stopPlaces[0].stationID;
@@ -134,7 +141,7 @@ const getPhoto = async (stopId) => {
     }
     const countryCode = response.data.stopPlaces[0].countryCode;
     url = `https://apis.deutschebahn.com/db-api-marketplace/apis/api.railway-stations.org/photoStationById/${countryCode}/${stationId}`;
-    response = await client.get(url);
+    response = await client.get(url, DBAPIHeaders);
 
     // If there are any photos of the stop, return the first one, otherwise return null
     const photos = response.data.stations[0].photos;
@@ -179,8 +186,11 @@ export const destinationsSlice = createSlice({
                     }
                     return 1;
                 });
+            })
+            .addCase(findDestinations.rejected, (state, action) => {
+                state.status = "failed";
             });
-    }
+    },
 });
 
 export const { showMore } = destinationsSlice.actions;
