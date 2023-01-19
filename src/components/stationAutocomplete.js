@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
-import { client, deutscheBahnHeaders } from '../api/client';
+import { client } from '../api/client';
 import { debounce } from '@mui/material/utils';
 
 function StationAutocomplete({ station, setStation }) {
@@ -10,8 +10,8 @@ function StationAutocomplete({ station, setStation }) {
     const fetch = React.useMemo(
         () =>
             debounce((request, callback) => {
-                const url = `https://apis.deutschebahn.com/db-api-marketplace/apis/fahrplan/v1/location/${request.input}`;
-                client.get(url, deutscheBahnHeaders)
+                const url = `https://v6.db.transport.rest/stations?query=${request.input}&results=5`;
+                client.get(url)
                     .then(callback);
             }, 400),
         [],
@@ -35,9 +35,8 @@ function StationAutocomplete({ station, setStation }) {
                 }
 
                 if (results) {
-                    newOptions = [...newOptions, ...results.data];
+                    newOptions = [...newOptions, ...Object.values(results.data)];
                 }
-
                 setOptions(newOptions);
             }
         });
@@ -48,40 +47,41 @@ function StationAutocomplete({ station, setStation }) {
     }, [station, inputValue, fetch]);
 
     return (
-        <Autocomplete
-            id="station-autocomplete"
-            sx={{ display: 'inline-block', width: 200 }}
-            getOptionLabel={(option) => option.name || ""}
-            filterOptions={(x) => x}
-            options={options}
-            autoComplete
-            includeInputInList
-            filterSelectedOptions
-            value={station}
-            noOptionsText="keine Stationen"
-            isOptionEqualToValue={(option, value) =>
-                option.id === value.id
-            }
-            onChange={(e, newValue) => {
-                setOptions(newValue ? [newValue, ...options] : options);
-                setStation(newValue);
-            }}
-            onInputChange={(e, newInputValue) => {
-                setInputValue(newInputValue);
-            }}
-            renderOption={(props, options) => (
-                <Box
-                    component="li"
-                    {...props}
-                    key={options.id}
-                    sx={{ wordBreak: "break-word" }}
-                >
-                    {options.name}
-                </Box>
-            )}
-            renderInput={(params) => <TextField {...params} variant="standard" />}
-
-        />
+        <>
+            <Autocomplete
+                id="station-autocomplete"
+                sx={{ display: 'inline-block', width: 200 }}
+                getOptionLabel={(option) => option.name || ""}
+                filterOptions={(x) => x}
+                options={options}
+                autoComplete
+                includeInputInList
+                filterSelectedOptions
+                value={station}
+                noOptionsText="keine Stationen"
+                isOptionEqualToValue={(option, value) =>
+                    option.id === value.id
+                }
+                onChange={(e, newValue) => {
+                    setOptions(newValue ? [newValue, ...options] : options);
+                    setStation(newValue);
+                }}
+                onInputChange={(e, newInputValue) => {
+                    setInputValue(newInputValue);
+                }}
+                renderOption={(props, options) => (
+                    <Box
+                        component="li"
+                        {...props}
+                        key={options.id}
+                        sx={{ wordBreak: "break-word" }}
+                    >
+                        {options.name}
+                    </Box>
+                )}
+                renderInput={(params) => <TextField {...params} variant="standard" />}
+            />
+        </>
     );
 }
 

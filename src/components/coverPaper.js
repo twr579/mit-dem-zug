@@ -17,7 +17,7 @@ function CoverPaper() {
                 <Typography variant="h3" component="h2">
                     <Typewriter
                         options={{
-                            strings: ["mit dem Zug", "eine Webseite von Tim R."],
+                            strings: ["mit dem Zug", "von Tim R."],
                             autoStart: true,
                             loop: true,
                         }}

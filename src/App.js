@@ -1,9 +1,11 @@
 import React from 'react'
-import { CssBaseline, ThemeProvider, Box, Container, Toolbar } from '@mui/material';
+import { CssBaseline, ThemeProvider, Box, Container, Toolbar, responsiveFontSizes, Backdrop, CircularProgress } from '@mui/material';
 import { appTheme } from './themes/theme';
 import Header from './components/header';
 import CoverPaper from './components/coverPaper';
 import BerlinHbf from './images/BerlinHbf.webp';
+import DestinationsList from './components/destinationsList';
+import { useSelector } from 'react-redux';
 
 function App() {
   const bgImage = {
@@ -12,20 +14,10 @@ function App() {
     backgroundRepeat: 'no-repeat',
   };
 
-  appTheme.typography.h3 = {
-    [appTheme.breakpoints.down('sm')]: {
-      fontSize: '1rem',
-    },
-    [appTheme.breakpoints.up('sm')]: {
-      fontSize: '1.5rem',
-    },
-    [appTheme.breakpoints.up('md')]: {
-      fontSize: '2rem',
-    },
-  };
+  const status = useSelector((state) => state.destinations.status);
 
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={responsiveFontSizes(appTheme)}>
       <CssBaseline />
       <Container maxWidth="lg">
         <Box
@@ -41,6 +33,12 @@ function App() {
             <CoverPaper />
           </Container>
         </Box>
+        <Backdrop
+          sx={{ color: "#fff" }}
+          open={status === "loading"}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </Container>
     </ThemeProvider >
   );

@@ -1,11 +1,6 @@
 // A tiny wrapper around fetch(), borrowed from
 // https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper
 
-export const deutscheBahnHeaders = {
-    'DB-Api-Key': '0f1f41c8ad89c2f0299e66253354b0fc',
-    'DB-Client-Id': '74f35008b2f0cb75d353554e071b5b0a',
-};
-
 export async function client(endpoint, { body, ...customConfig } = {}) {
     const headers = {
         'Content-Type': 'application/json',
