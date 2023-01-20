@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Timeline } from "@mui/lab";
+import { Timeline, timelineOppositeContentClasses } from "@mui/lab";
 import TimelineOrigin from "./timeline/timelineOrigin";
 import TimelineDestination from "./timeline/timelineDestination";
 import TimelineTransfer from "./timeline/timelineTransfer";
@@ -48,7 +48,11 @@ function DestinationMoreDetails({ route }) {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    <Timeline>
+                    <Timeline sx={{
+                        [`& .${timelineOppositeContentClasses.root}`]: {
+                            flex: 0.7,
+                        },
+                    }}>
                         {route.map((stop, index) => {
                             if (index === 0) {
                                 // Start station
@@ -56,6 +60,7 @@ function DestinationMoreDetails({ route }) {
                                     <TimelineOrigin
                                         stop={stop}
                                         nextStop={route[index + 1]}
+                                        key={stop.id}
                                     />
                                 );
                             } else if (index === route.length - 1) {
@@ -63,6 +68,7 @@ function DestinationMoreDetails({ route }) {
                                 return (
                                     <TimelineDestination
                                         stop={stop}
+                                        key={stop.id}
                                     />
                                 );
 
@@ -72,6 +78,7 @@ function DestinationMoreDetails({ route }) {
                                     <TimelineTransfer
                                         stop={stop}
                                         nextStop={route[index + 1]}
+                                        key={stop.id}
                                     />
                                 );
 

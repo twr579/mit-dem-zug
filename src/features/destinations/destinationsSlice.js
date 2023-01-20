@@ -139,21 +139,25 @@ const getTrip = async (tripId, stopId) => {
 // Inputs:
 //  stopId: the unique id of the current stop
 const getPhoto = async (stopId) => {
-    let url = `https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/${stopId}`;
-    let response = await client.get(url, DBAPIHeaders);
+    try {
+        let url = `https://apis.deutschebahn.com/db-api-marketplace/apis/ris-stations/v1/stop-places/${stopId}`;
+        let response = await client.get(url, DBAPIHeaders);
 
-    // Some stops don't have station ids, so default to the stop id
-    let stationId = response.data.stopPlaces[0].stationID;
-    if (!stationId) {
-        stationId = stopId;
+        // Some stops don't have station ids, so default to the stop id
+        let stationId = response.data.stopPlaces[0].stationID;
+        if (!stationId) {
+            stationId = stopId;
+        }
+        const countryCode = response.data.stopPlaces[0].countryCode;
+        url = `https://apis.deutschebahn.com/db-api-marketplace/apis/api.railway-stations.org/photoStationById/${countryCode}/${stationId}`;
+        response = await client.get(url, DBAPIHeaders);
+
+        // If there are any photos of the stop, return the first one, otherwise return null
+        const photos = response.data.stations[0].photos;
+        return photos.length > 0 ? response.data.photoBaseUrl + photos[0].path : null;
+    } catch (err) {
+        return null;
     }
-    const countryCode = response.data.stopPlaces[0].countryCode;
-    url = `https://apis.deutschebahn.com/db-api-marketplace/apis/api.railway-stations.org/photoStationById/${countryCode}/${stationId}`;
-    response = await client.get(url, DBAPIHeaders);
-
-    // If there are any photos of the stop, return the first one, otherwise return null
-    const photos = response.data.stations[0].photos;
-    return photos.length > 0 ? response.data.photoBaseUrl + photos[0].path : null;
 }
 
 // Finds and returns the list of possible destinations

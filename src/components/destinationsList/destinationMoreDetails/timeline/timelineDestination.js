@@ -23,7 +23,7 @@ function TimelineDestination({ stop }) {
                     <PlaceIcon />
                 </TimelineDot>
             </TimelineSeparator>
-            <TimelineContent sx={{ my: 0, mx: 1, p: 0 }}>
+            <TimelineContent sx={{ my: 0, mx: 1, p: 0 }} >
                 <Typography variant="h6" component="span">
                     {stop.name}
                 </Typography>

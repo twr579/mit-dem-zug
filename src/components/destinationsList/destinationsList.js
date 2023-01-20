@@ -56,7 +56,7 @@ function DestinationsList() {
                                         </Paper>
                                     }
                                 </Grid>
-                                <Grid item sm={12} md={6}>
+                                <Grid item sm={12} md={6} sx={{ overflow: 'auto' }}>
                                     <Typography variant="h2">{dest.name}</Typography>
                                     <Chip
                                         icon={<ScheduleIcon />}
@@ -74,7 +74,7 @@ function DestinationsList() {
             {
                 show < destinations.length && (
                     <Button onClick={() => dispatch(showMore())}>
-                        Load more
+                        mehr Ergebnisse
                     </Button>
                 )
             }
