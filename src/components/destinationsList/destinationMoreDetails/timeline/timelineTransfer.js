@@ -38,7 +38,7 @@ function TimelineTransfer({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Gl. {stop.arrivalPlatform || "?"}</Typography>
+                    <Typography>Pl. {stop.arrivalPlatform || "?"}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>
@@ -77,7 +77,7 @@ function TimelineTransfer({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Gl. {stop.departurePlatform}</Typography>
+                    <Typography>Pl. {stop.departurePlatform}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>

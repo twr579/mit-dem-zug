@@ -58,7 +58,7 @@ function StationAutocomplete({ station, setStation }) {
                 includeInputInList
                 filterSelectedOptions
                 value={station}
-                noOptionsText="keine Stationen"
+                noOptionsText="No stations"
                 isOptionEqualToValue={(option, value) =>
                     option.id === value.id
                 }

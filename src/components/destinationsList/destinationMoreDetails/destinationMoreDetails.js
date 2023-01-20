@@ -25,7 +25,7 @@ function DestinationMoreDetails({ route }) {
                 variant="text"
                 sx={{ display: 'block' }}
                 onClick={handleClickOpen}
-            >Weitere Informationen
+            >More Details
             </Button>
             <Dialog
                 open={open}

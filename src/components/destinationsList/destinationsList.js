@@ -17,7 +17,7 @@ function DestinationsList() {
         <Stack id="destinations-list" sx={{ bgcolor: 'background.paper', my: 2 }}>
             <Paper variant="outlined" square sx={{ p: 2, overflow: 'auto' }}>
                 <Typography variant="h2" textAlign="center">
-                    STATIONEN({destinations.length})
+                    STATIONS({destinations.length})
                 </Typography>
             </Paper>
             {
@@ -51,7 +51,7 @@ function DestinationsList() {
                                         :
                                         <Paper variant="outlined" square sx={{ width: '100%', px: 4, py: '20%' }}>
                                             <Typography variant="h3" color="primary.main" textAlign="center">
-                                                Foto wird nicht gefunden
+                                                Photo not found
                                             </Typography>
                                         </Paper>
                                     }
@@ -74,7 +74,7 @@ function DestinationsList() {
             {
                 show < destinations.length && (
                     <Button onClick={() => dispatch(showMore())}>
-                        mehr Ergebnisse
+                        More Results
                     </Button>
                 )
             }

@@ -71,11 +71,11 @@ function SelectStationAndTimeLimitForm() {
                 if (destinationsList) {
                     window.scrollTo({ top: destinationsList.offsetTop - 80, behavior: 'smooth' });
                 } else {
-                    setOpenSnackbar("keine Ergebnisse");
+                    setOpenSnackbar("No Results");
                 }
             } catch (err) {
                 console.error("Failed to get destinations: ", err);
-                setOpenSnackbar("Fehler")
+                setOpenSnackbar("Error")
             }
         }
     }
@@ -88,9 +88,9 @@ function SelectStationAndTimeLimitForm() {
     return (
         <>
             <Typography variant="h4" component="h3">
-                Du bist am{" "}
+                You're at{" "}
                 <StationAutocomplete station={station} setStation={setStation} />
-                {" "}und hast gar nichts zu tun. Du möchtest in{" "}
+                {" "}with nothing to do. You want to be anywhere else in{" "}
                 <TextField
                     id="standard-basic"
                     variant="standard"
@@ -121,14 +121,14 @@ function SelectStationAndTimeLimitForm() {
                     }}
                     onChange={onChangeMinutes}
                     onKeyDown={checkIsNumericOrBackspace} />
-                {" "}min oder weniger irgendwo anders sein. Wohin kannst du mit dem Zug?
+                {" "}min or less. Where can you go by train?
             </Typography>
             <Button
                 variant="outlined"
                 onClick={handleSubmit}
                 disabled={!canSubmit}
             >
-                LOS GEHT'S!
+                LET'S GO!
             </Button>
             <Snackbar
                 open={openSnackbar !== ''}

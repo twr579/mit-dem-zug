@@ -17,7 +17,7 @@ function CoverPaper() {
                 <Typography variant="h3" component="h2">
                     <Typewriter
                         options={{
-                            strings: ["mit dem Zug", "von Tim R."],
+                            strings: ["mit dem Zug", "by train", "by Tim R."],
                             autoStart: true,
                             loop: true,
                         }}
@@ -26,7 +26,7 @@ function CoverPaper() {
                 <Box
                     component="img"
                     sx={{ height: "auto", width: "25%" }}
-                    alt="Ein Logo eines Zuges"
+                    alt="Train logo"
                     src={logo}
                 />
                 <SelectStationAndTimeLimitForm />

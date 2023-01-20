@@ -10,7 +10,7 @@ function Header() {
                     <Box
                         component="img"
                         sx={{ height: 64, mr: 1 }}
-                        alt="Ein Logo eines Zuges"
+                        alt="Train logo"
                         src={logo}
                     />
                     <Typography

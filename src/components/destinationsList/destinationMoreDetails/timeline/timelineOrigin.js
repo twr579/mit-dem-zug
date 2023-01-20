@@ -32,7 +32,7 @@ function TimelineOrigin({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Gl. {stop.departurePlatform}</Typography>
+                    <Typography>Pl. {stop.departurePlatform}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>
