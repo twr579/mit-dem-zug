@@ -192,9 +192,9 @@ export const destinationsSlice = createSlice({
                         return -1;
                     }
 
-                    // If trips arrive at the same time, the shorter one comes first
+                    // If trips arrive at the same time, the longer one comes first
                     if (a.arrival === b.arrival) {
-                        return a.total < b.total ? -1 : 1;
+                        return a.total > b.total ? -1 : 1;
                     }
                     return 1;
                 });

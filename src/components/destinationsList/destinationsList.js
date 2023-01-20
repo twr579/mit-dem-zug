@@ -62,7 +62,7 @@ function DestinationsList() {
                                         icon={<ScheduleIcon />}
                                         color="secondary"
                                         label={timeString}
-                                        sx={{ my: 1, width: 'fit-content', boxShadow: '1px 1px 1px black' }}
+                                        sx={{ my: 1, mr: 1, boxShadow: '1px 1px 1px black' }}
                                     />
                                     <DestinationMoreDetails route={dest.route} />
                                 </Grid>
