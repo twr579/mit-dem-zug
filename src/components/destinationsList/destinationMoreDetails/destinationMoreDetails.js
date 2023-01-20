@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Timeline, timelineOppositeContentClasses } from "@mui/lab";
+import { Timeline, timelineOppositeContentClasses, timelineContentClasses } from "@mui/lab";
 import TimelineOrigin from "./timeline/timelineOrigin";
 import TimelineDestination from "./timeline/timelineDestination";
 import TimelineTransfer from "./timeline/timelineTransfer";
@@ -47,10 +47,15 @@ function DestinationMoreDetails({ route }) {
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent sx={{ p: 0 }}>
                     <Timeline sx={{
+                        p: 0,
                         [`& .${timelineOppositeContentClasses.root}`]: {
-                            flex: 0.7,
+                            flex: 0.4,
+                            wordBreak: 'break-word',
+                        },
+                        [`& .${timelineContentClasses.root}`]: {
+                            wordBreak: 'break-word',
                         },
                     }}>
                         {route.map((stop, index) => {

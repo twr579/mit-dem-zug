@@ -15,7 +15,7 @@ function DestinationsList() {
     return (
         destinations.length > 0 &&
         <Stack id="destinations-list" sx={{ bgcolor: 'background.paper', my: 2 }}>
-            <Paper variant="outlined" square sx={{ p: 2 }}>
+            <Paper variant="outlined" square sx={{ p: 2, overflow: 'auto' }}>
                 <Typography variant="h2" textAlign="center">
                     STATIONEN({destinations.length})
                 </Typography>
