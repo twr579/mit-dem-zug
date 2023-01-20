@@ -79,7 +79,8 @@ function StationAutocomplete({ station, setStation }) {
                         {options.name}
                     </Box>
                 )}
-                renderInput={(params) => <TextField {...params} variant="standard" />}
+                renderInput={(params) => <TextField {...params} variant="standard" aria-label="input" />}
+                ListboxProps={{ 'data-testid': 'list-box' }}
             />
         </>
     );

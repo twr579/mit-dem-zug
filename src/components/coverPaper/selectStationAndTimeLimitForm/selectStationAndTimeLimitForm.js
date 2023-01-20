@@ -92,6 +92,7 @@ function SelectStationAndTimeLimitForm() {
                 <StationAutocomplete station={station} setStation={setStation} />
                 {" "}with nothing to do. You want to be anywhere else in{" "}
                 <TextField
+                    aria-label="hours"
                     id="standard-basic"
                     variant="standard"
                     type="number"
@@ -108,6 +109,7 @@ function SelectStationAndTimeLimitForm() {
                 />
                 {" "}h{" "}
                 <TextField
+                    aria-label="minutes"
                     id="standard-basic"
                     variant="standard"
                     type="number"
