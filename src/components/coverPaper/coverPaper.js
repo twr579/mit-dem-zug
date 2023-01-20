@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack, Paper, Box, Typography } from '@mui/material';
-import logo from '../logo.svg';
+import logo from '../../logo.svg';
 import Typewriter from 'typewriter-effect';
-import SelectStationAndTimeLimitForm from './selectStationAndTimeLimitForm';
+import SelectStationAndTimeLimitForm from './selectStationAndTimeLimitForm/selectStationAndTimeLimitForm';
 
 function CoverPaper() {
     return (

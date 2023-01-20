@@ -1,14 +1,17 @@
 import { createTheme } from '@mui/material/styles';
-import { blueGrey, grey } from '@mui/material/colors';
+import { blueGrey } from '@mui/material/colors';
 
 export const appTheme = createTheme({
     palette: {
         background: {
-            default: grey[300],
+            default: blueGrey[100],
         },
         primary: {
             main: blueGrey[300],
         },
+        secondary: {
+            main: blueGrey[200],
+        }
     },
     typography: {
         fontFamily: [

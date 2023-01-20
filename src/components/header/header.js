@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Box, Typography } from '@mui/material';
-import logo from '../logo.svg';
+import logo from '../../logo.svg';
 
 function Header() {
     return (

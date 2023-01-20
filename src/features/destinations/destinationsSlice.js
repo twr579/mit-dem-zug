@@ -67,17 +67,25 @@ const findDestinationsHelper = async (start, stopId, currTime, remainingTime, tr
                         }
                     }
 
-                    // Add the valid destination to the current route, and add it to the destinations list
                     const newRoute = JSON.parse(JSON.stringify(currRoute));
-                    newRoute[newRoute.length - 1].departure = departure.when;
-                    newRoute[newRoute.length - 1].departurePlatform = departure.platform;
-                    newRoute.push({
+                    let stopOnRoute = {
                         name: arrival.stop.name,
                         id: arrival.stop.id,
                         train: departure.line.name,
                         arrival: arrival.arrival,
                         arrivalPlatform: arrival.arrivalPlatform
-                    });
+                    };
+
+                    // Add the valid destination to the destinations list, and add it to the current route if a transfer is involved
+                    // i.e., the train name is different from the previous one in the route
+                    // Otherwise, overwrite the previous destination in the route
+                    if (newRoute[newRoute.length - 1].train == null || newRoute[newRoute.length - 1].train !== departure.line.name) {
+                        newRoute[newRoute.length - 1].departure = departure.when;
+                        newRoute[newRoute.length - 1].departurePlatform = departure.platform;
+                        newRoute.push(stopOnRoute);
+                    } else {
+                        newRoute.splice(1, newRoute.length - 1, stopOnRoute);
+                    }
                     const total = (new Date(arrival.arrival) - new Date(newRoute[0].departure)) / (1000 * 60);
                     const photoUrl = await getPhoto(arrival.stop.id);
 

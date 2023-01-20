@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, TextField, Button, Snackbar, Slide, SnackbarContent } from '@mui/material';
 import StationAutocomplete from './stationAutocomplete';
 import { useDispatch } from 'react-redux';
-import { findDestinations } from '../features/destinations/destinationsSlice';
+import { findDestinations } from '../../../features/destinations/destinationsSlice';
 
 function TransitionUp(props) {
     return <Slide {...props} direction="up" />;
@@ -88,7 +88,10 @@ function SelectStationAndTimeLimitForm() {
     return (
         <>
             <Typography variant="h4" component="h3">
-                Du bist am <StationAutocomplete station={station} setStation={setStation} /> und hast gar nichts zu tun. Du möchtest in <TextField
+                Du bist am{" "}
+                <StationAutocomplete station={station} setStation={setStation} />
+                {" "}und hast gar nichts zu tun. Du möchtest in{" "}
+                <TextField
                     id="standard-basic"
                     variant="standard"
                     type="number"
@@ -102,7 +105,9 @@ function SelectStationAndTimeLimitForm() {
                     }}
                     onChange={onChangeHours}
                     onKeyDown={checkIsNumericOrBackspace}
-                /> h <TextField
+                />
+                {" "}h{" "}
+                <TextField
                     id="standard-basic"
                     variant="standard"
                     type="number"
@@ -115,7 +120,8 @@ function SelectStationAndTimeLimitForm() {
                         e.target.value = e.target.value.slice(0, 2)
                     }}
                     onChange={onChangeMinutes}
-                    onKeyDown={checkIsNumericOrBackspace} /> min oder weniger irgendwo anders sein. Wohin kannst du mit dem Zug?
+                    onKeyDown={checkIsNumericOrBackspace} />
+                {" "}min oder weniger irgendwo anders sein. Wohin kannst du mit dem Zug?
             </Typography>
             <Button
                 variant="outlined"

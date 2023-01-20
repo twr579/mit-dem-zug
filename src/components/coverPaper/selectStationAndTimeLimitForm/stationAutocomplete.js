@@ -1,6 +1,6 @@
 import React from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
-import { client } from '../api/client';
+import { client } from '../../../api/client';
 import { debounce } from '@mui/material/utils';
 
 function StationAutocomplete({ station, setStation }) {
