@@ -5,10 +5,14 @@ import { Timeline, timelineOppositeContentClasses, timelineContentClasses } from
 import TimelineOrigin from "./timeline/timelineOrigin";
 import TimelineDestination from "./timeline/timelineDestination";
 import TimelineTransfer from "./timeline/timelineTransfer";
+import { tokens } from "../../../locales/tokens";
+import { useTranslation } from "react-i18next";
 
 function DestinationMoreDetails({ route }) {
     const [open, setOpen] = React.useState(false);
 
+    const { t } = useTranslation();
+    
     // Open Dialog
     const handleClickOpen = () => {
         setOpen(true);
@@ -25,7 +29,8 @@ function DestinationMoreDetails({ route }) {
                 variant="text"
                 sx={{ display: 'block' }}
                 onClick={handleClickOpen}
-            >More Details
+            >
+                {t(tokens.destinationsList.moreDetails)}
             </Button>
             <Dialog
                 open={open}

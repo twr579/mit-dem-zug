@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { CssBaseline, ThemeProvider, Box, Container, Toolbar, responsiveFontSizes, Backdrop, CircularProgress } from '@mui/material';
 import { appTheme } from './themes/theme';
 import Header from './components/header/header';
@@ -6,6 +6,8 @@ import CoverPaper from './components/coverPaper/coverPaper';
 import BerlinHbf from './images/BerlinHbf.webp';
 import DestinationsList from './components/destinationsList/destinationsList';
 import { useSelector } from 'react-redux';
+import i18next from 'i18next';
+import './locales/i18n';
 
 function App() {
   const bgImage = {
@@ -15,6 +17,11 @@ function App() {
   };
 
   const status = useSelector((state) => state.destinations.status);
+  const language = useSelector((state) => state.language);
+
+  useEffect(() => {
+    i18next.changeLanguage(language);
+  }, [language]);
 
   return (
     <ThemeProvider theme={responsiveFontSizes(appTheme)}>

@@ -4,6 +4,8 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import { useDispatch, useSelector } from 'react-redux';
 import DestinationMoreDetails from './destinationMoreDetails/destinationMoreDetails';
 import { showMore } from '../../features/destinations/destinationsSlice';
+import { useTranslation } from 'react-i18next';
+import { tokens } from '../../locales/tokens';
 
 const { formatInTimeZone } = require('date-fns-tz')
 
@@ -12,12 +14,14 @@ function DestinationsList() {
     const destinations = useSelector((state) => state.destinations.destinations);
     const show = useSelector((state) => state.destinations.show);
 
+    const { t } = useTranslation();
+
     return (
         destinations.length > 0 &&
         <Stack id="destinations-list" sx={{ bgcolor: 'background.paper', my: 2 }}>
             <Paper variant="outlined" square sx={{ p: 2, overflow: 'auto' }}>
                 <Typography variant="h2" textAlign="center">
-                    STATIONS({destinations.length})
+                    {t(tokens.destinationsList.stations).toUpperCase()}({destinations.length})
                 </Typography>
             </Paper>
             {
@@ -51,7 +55,7 @@ function DestinationsList() {
                                         :
                                         <Paper variant="outlined" square sx={{ width: '100%', px: 4, py: '20%' }}>
                                             <Typography variant="h3" color="primary.main" textAlign="center">
-                                                Photo not found
+                                                {t(tokens.destinationsList.photoNotFound)}
                                             </Typography>
                                         </Paper>
                                     }
@@ -74,7 +78,7 @@ function DestinationsList() {
             {
                 show < destinations.length && (
                     <Button onClick={() => dispatch(showMore())}>
-                        More Results
+                        {t(tokens.destinationsList.moreResults)}
                     </Button>
                 )
             }

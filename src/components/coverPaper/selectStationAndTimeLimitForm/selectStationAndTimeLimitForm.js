@@ -3,6 +3,8 @@ import { Typography, TextField, Button, Snackbar, Slide, SnackbarContent } from 
 import StationAutocomplete from './stationAutocomplete';
 import { useDispatch } from 'react-redux';
 import { findDestinations } from '../../../features/destinations/destinationsSlice';
+import { useTranslation } from 'react-i18next';
+import { tokens } from '../../../locales/tokens';
 
 function TransitionUp(props) {
     return <Slide {...props} direction="up" />;
@@ -14,6 +16,8 @@ function SelectStationAndTimeLimitForm() {
     const [minutes, setMinutes] = React.useState('');
     const [openSnackbar, setOpenSnackbar] = React.useState('');
     const canSubmit = [station, hours, minutes].every((element) => { return element != null && element !== '' });
+
+    const { t } = useTranslation();
 
     const dispatch = useDispatch();
 
@@ -71,11 +75,10 @@ function SelectStationAndTimeLimitForm() {
                 if (destinationsList) {
                     window.scrollTo({ top: destinationsList.offsetTop - 80, behavior: 'smooth' });
                 } else {
-                    setOpenSnackbar("No Results");
+                    setOpenSnackbar(t(tokens.snackbar.noResults));
                 }
             } catch (err) {
-                console.error("Failed to get destinations: ", err);
-                setOpenSnackbar("Error")
+                setOpenSnackbar(t(tokens.snackbar.error))
             }
         }
     }
@@ -88,9 +91,9 @@ function SelectStationAndTimeLimitForm() {
     return (
         <>
             <Typography variant="h4" component="h3">
-                You're at{" "}
+                {t(tokens.coverPaper.description.line1)}
                 <StationAutocomplete station={station} setStation={setStation} />
-                {" "}with nothing to do. You want to be anywhere else in{" "}
+                {t(tokens.coverPaper.description.line2)}
                 <TextField
                     aria-label="hours"
                     id="standard-basic"
@@ -122,15 +125,16 @@ function SelectStationAndTimeLimitForm() {
                         e.target.value = e.target.value.slice(0, 2)
                     }}
                     onChange={onChangeMinutes}
-                    onKeyDown={checkIsNumericOrBackspace} />
-                {" "}min or less. Where can you go by train?
+                    onKeyDown={checkIsNumericOrBackspace} 
+                />
+                {t(tokens.coverPaper.description.line3)}
             </Typography>
             <Button
                 variant="outlined"
                 onClick={handleSubmit}
                 disabled={!canSubmit}
             >
-                LET'S GO!
+                {t(tokens.coverPaper.button)}
             </Button>
             <Snackbar
                 open={openSnackbar !== ''}

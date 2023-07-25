@@ -3,6 +3,8 @@ import { Typography } from "@mui/material";
 import { TimelineItem, TimelineOppositeContent, TimelineSeparator, TimelineDot, TimelineConnector, TimelineContent } from "@mui/lab";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import TrainIcon from '@mui/icons-material/Train';
+import { useTranslation } from "react-i18next";
+import { tokens } from "../../../../locales/tokens";
 
 const { formatInTimeZone } = require('date-fns-tz');
 
@@ -10,6 +12,8 @@ function TimelineOrigin({ stop, nextStop }) {
     const departure = formatInTimeZone(new Date(stop.departure), "Europe/Berlin", "HH:mm");
     const total = (new Date(nextStop.arrival) - new Date(stop.departure)) / (1000 * 60);
     const totalString = Math.floor(total / 60) + "h " + (total % 60) + "min";
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -32,7 +36,7 @@ function TimelineOrigin({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Pl. {stop.departurePlatform}</Typography>
+                    <Typography>{t(tokens.destinationsList.platform)}. {stop.departurePlatform}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>

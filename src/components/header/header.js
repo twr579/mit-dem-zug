@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import logo from '../../logo.svg';
+import LanguagePicker from './languagePicker';
 
 function Header() {
     return (
@@ -20,6 +21,7 @@ function Header() {
                     >
                         mit dem Zug
                     </Typography>
+                    <LanguagePicker />
                 </Toolbar>
             </AppBar>
         </Box >

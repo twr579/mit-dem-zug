@@ -4,6 +4,8 @@ import { TimelineItem, TimelineOppositeContent, TimelineSeparator, TimelineDot, 
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import TrainIcon from '@mui/icons-material/Train';
+import { useTranslation } from "react-i18next";
+import { tokens } from "../../../../locales/tokens";
 
 const { formatInTimeZone } = require('date-fns-tz');
 
@@ -16,6 +18,8 @@ function TimelineTransfer({ stop, nextStop }) {
     const transferString = Math.floor(transfer / 60) + "h " + (transfer % 60) + "min";
     const total = (new Date(nextStop.arrival) - new Date(stop.departure)) / (1000 * 60);
     const totalString = Math.floor(total / 60) + "h " + (total % 60) + "min";
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -38,7 +42,7 @@ function TimelineTransfer({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Pl. {stop.arrivalPlatform || "?"}</Typography>
+                    <Typography>{t(tokens.destinationsList.platform)}. {stop.arrivalPlatform || "?"}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>
@@ -77,7 +81,7 @@ function TimelineTransfer({ stop, nextStop }) {
                     <Typography variant="h6" component="span">
                         {stop.name}
                     </Typography>
-                    <Typography>Pl. {stop.departurePlatform}</Typography>
+                    <Typography>{t(tokens.destinationsList.platform)}. {stop.departurePlatform}</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>

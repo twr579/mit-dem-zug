@@ -2,10 +2,14 @@ import React from 'react';
 import { Autocomplete, Box, TextField } from '@mui/material';
 import { client } from '../../../api/client';
 import { debounce } from '@mui/material/utils';
+import { useTranslation } from 'react-i18next';
+import { tokens } from '../../../locales/tokens';
 
 function StationAutocomplete({ station, setStation }) {
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
+
+    const { t } = useTranslation();
 
     const fetch = React.useMemo(
         () =>
@@ -58,7 +62,7 @@ function StationAutocomplete({ station, setStation }) {
                 includeInputInList
                 filterSelectedOptions
                 value={station}
-                noOptionsText="No stations"
+                noOptionsText={t(tokens.coverPaper.noOptions)}
                 isOptionEqualToValue={(option, value) =>
                     option.id === value.id
                 }
