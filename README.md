@@ -12,6 +12,4 @@ If you live in Germany and enjoy a bit of spontaneous travel, mit dem Zug (Germa
 3. Visit http://localhost:3000/
 
 ## Deployments
-https://mit-dem-zug-sxinc232ga-uc.a.run.app/ (English version)
-
-https://mit-dem-zug-de-uuc3zyggfa-uc.a.run.app/ (German version)
+https://www.mitdemzug.com/
