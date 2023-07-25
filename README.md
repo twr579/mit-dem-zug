@@ -12,4 +12,4 @@ If you live in Germany and enjoy a bit of spontaneous travel, mit dem Zug (Germa
 3. Visit http://localhost:3000/
 
 ## Deployments
-https://www.mitdemzug.com/
+https://mitdemzug.com/
